@@ -18,7 +18,7 @@ body {
 .logo h1 {
   color: #e63946;
   margin: 0;
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .logo span {
@@ -49,11 +49,11 @@ body {
 }
 
 .textBanner {
-  margin-left: 60px;
+  margin-left: 40px;
 }
 
 .banner h2 {
-  font-size: 36px;
+  font-size: 50px;
   margin: 0;
 }
 
@@ -63,7 +63,7 @@ body {
 
 /* Categorias */
 .categorias {
-  padding: 30px 50px;
+  padding: 15px 50px;
 }
 
 .categoria-lista {
@@ -91,6 +91,9 @@ body {
 /* Filtros */
 .filtros {
   padding: 10px 50px;
+}
+.filtros h4 {
+  font-size: 25px;
 }
 
 .botoes-filtro button {
