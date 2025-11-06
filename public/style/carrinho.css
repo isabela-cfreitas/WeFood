@@ -1,0 +1,41 @@
+.header {
+    text-align: center;
+    color: #F62932;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    text-align: center;
+    gap: 40px;
+    margin: 40px; 
+}
+
+.coluna {
+    flex: 1;
+    width: 45%;
+    border: 2px solid #ccc; 
+    border-radius: 15px;
+}
+
+.headColuna {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.botao {
+    background-color: #F62932;
+    color:white;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    border: 2px solid #F62932; 
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    font-weight: bold;
+}
