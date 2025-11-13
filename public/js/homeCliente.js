@@ -7,15 +7,15 @@ async function carregarEstabelecimentos() {
 
 async function renderizarEstabelecimentos() {
     const container = document.getElementById("listaRestaurantes");
-    container.innerHTML = "";
+    container.innerHTML = ""; //limpar se ja tinha algo lá
 
-    const resposta = await fetch("/api/estabelecimentos");
-    const estabelecimentos = await resposta.json();
+    const resposta = await fetch("/api/estabelecimentos"); //requisição lá de server.js
+    const estabelecimentos = await resposta.json(); //transforma de json para array js
 
     estabelecimentos.forEach(est => {
         //<div class="card">
         const card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add("card"); //adiciona classe cs à div
 
         //<img src="..." alt="...">
         const img = document.createElement("img");
@@ -29,7 +29,7 @@ async function renderizarEstabelecimentos() {
         //<p>distância • avaliação • frete</p>
         const info = document.createElement("p");
         info.textContent =
-            `${est.distancia} km • ⭐ ${est.avaliacao} • Frete R$ ${est.frete}`;
+            `${est.distancia} km • ⭐ ${est.avaliacao} • Frete R$ ${est.frete}`; //$ serve para usar variaveis na string
 
         //monta estrutura
         card.appendChild(img);
@@ -42,7 +42,7 @@ async function renderizarEstabelecimentos() {
                 `cardapio.html?nome=${encodeURIComponent(est.nome)}`;
         });
 
-        container.appendChild(card);
+        container.appendChild(card); //container pega todos os cards
     });
 }
 

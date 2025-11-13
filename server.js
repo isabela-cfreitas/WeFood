@@ -12,6 +12,8 @@ app.get('/', (req, res)=> {
 
 app.get('/api/estabelecimentos', async (req, res) => {
     try {
+        //const resultado = await pool.query(...);
+        //const rows = resultado[0];
         const [rows] = await pool.query(`
             SELECT 
                 u.id_usuario AS id,
