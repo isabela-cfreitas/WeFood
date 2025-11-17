@@ -1,15 +1,19 @@
 "use strict";
 
-async function carregarEstabelecimentos() {
-    const resp = await fetch('/api/estabelecimentos');
-    return await resp.json();
-}
-
 async function renderizarEstabelecimentos() {
     const container = document.getElementById("listaRestaurantes");
     container.innerHTML = ""; //limpar se ja tinha algo lá
 
-    const resposta = await fetch("/api/estabelecimentos"); //requisição lá de server.js
+    const resposta = await fetch("/api/estabelecimentos"); //faz requisição para server.js
+    /*
+    fetch usa get por padrao
+    se quisesse post:
+        fetch("/api/estabelecimentos", {
+        method: "POST",
+        body: JSON.stringify({...}),
+        headers: { "Content-Type": "application/json" }
+        });
+    */
     const estabelecimentos = await resposta.json(); //transforma de json para array js
 
     estabelecimentos.forEach(est => {
