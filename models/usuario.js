@@ -1,9 +1,14 @@
 class Usuario {
-    constructor(nome, numTelefone, email, hashSenha) {
+    constructor(id,nome, numTelefone, email, hashSenha) {
+        this._id = id;
         this._nome = nome;
         this._numTelefone = numTelefone;
         this._email = email;
         this._hashSenha = hashSenha;
+    }
+
+    get id (){
+        return this._id;
     }
 
     get nome() {
