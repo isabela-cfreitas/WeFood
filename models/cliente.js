@@ -1,28 +1,28 @@
 class Cliente extends Usuario {
-    constructor (nome, numTelefone, email, hashSenha, cpf, enderecos, carrinho) {
+    constructor(nome, numTelefone, email, hashSenha, cpf, enderecos, carrinho) {
         super(nome, numTelefone, email, hashSenha);
         this._cpf = cpf;
         this._enderecos = enderecos;
         this._carrinho = carrinho;
     }
 
-    get cpf () {
+    get cpf() {
         return this._cpf;
     }
 
-    get enderecos () {
+    get enderecos() {
         return this._enderecos;
     }
 
-    get carrinho () {
+    get carrinho() {
         return this._carrinho;
     }
 
-    set enderecos (enderecos) {
+    set enderecos(enderecos) {
         this._enderecos = enderecos;
     }
 
-    set carrinho (carrinho) {
+    set carrinho(carrinho) {
         this._carrinho;
     }
     
@@ -32,9 +32,9 @@ class Cliente extends Usuario {
             numTelefone: this.numTelefone,
             email: this.email,
             hashSenha: this.hashSenha,
-            cpf: this._cpf,
-            endereco: this._endereco,
-            carrinho: this._carrinho
+            cpf: this.cpf,
+            endereco: this.endereco,
+            carrinho: this.carrinho
         };
     }
 }
