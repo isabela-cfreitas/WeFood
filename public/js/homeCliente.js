@@ -42,8 +42,7 @@ async function renderizarEstabelecimentos() {
 
         //event clique
         card.addEventListener("click", () => {
-            window.location.href =
-                `cardapio.html?nome=${encodeURIComponent(est.nome)}`;
+            window.location.href = `cardapio.html?id=${est.id}`;
         });
 
         container.appendChild(card); //container pega todos os cards
