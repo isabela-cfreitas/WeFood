@@ -1,4 +1,5 @@
 const pool = require("../db");
+const Produto = require("./produto");
 
 class ProdutoModel {
     static async getPorCnpj(cnpj) {
@@ -7,13 +8,15 @@ class ProdutoModel {
             [cnpj]
         );
 
-        return rows.map(p => ({
-            id_produto: p.id_produto,
-            cnpj_estabelecimento: p.cnpj_estabelecimento,
-            nome: p.nome,
-            valor: Number(p.valor),
-            imagem: p.imagem
-        }));
+        return rows.map(p => 
+            new Produto (
+                p.id_produto,
+                p.nome,
+                Number(p.valor),
+                p.cnpj_estabelecimento,
+                p.imagem
+            )
+        );
     }
 }
 

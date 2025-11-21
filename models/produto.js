@@ -32,11 +32,11 @@ class Produto {
     }
 
     set valor(valor) {
-        this._valor;
+        this._valor = valor;
     }
 
     set imagem(nome) {
-        this._imagem = this.imagem;
+        this._imagem = imagem;
     }
 
     toJSON() {
