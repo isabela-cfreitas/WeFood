@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const estRoutes = require("./routes/estabelecimentoRoutes");//recebe requisição e joga para rotas
-const produtoRoutes = require("./routes/produtoRoutes");
+const estRoutes = require("./routes/estabelecimentoRoutes");//recebe requisição e joga para rotas de estabelecimento
+const produtoRoutes = require("./routes/produtoRoutes"); //joga a requisição para rotas de produto
 
 app.use(express.static(path.join(__dirname, 'public')));
 

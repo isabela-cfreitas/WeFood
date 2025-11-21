@@ -3,7 +3,7 @@ const pool = require("../db");
 class ProdutoModel {
     static async getPorCnpj(cnpj) {
         const [rows] = await pool.query(
-            "SELECT * FROM produtos WHERE cnpj_estabelecimento = ?",
+            "SELECT * FROM produtos WHERE cnpj_estabelecimento = ?",//consulta no mysql qual estabelecimento tem aquele cnpj
             [cnpj]
         );
 
