@@ -44,7 +44,8 @@ class Produto {
             id: this.id,
             nome: this.nome,
             valor: this.valor,
-            cnpj_estabelecimento: this.cnpj_estabelecimento
+            cnpj_estabelecimento: this.cnpj_estabelecimento,
+            imagem: this.imagem
         };
     }
 }
