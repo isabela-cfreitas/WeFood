@@ -40,7 +40,6 @@ function renderizarProdutos(lista) {
 
         const preco = document.createElement("p");
         preco.innerHTML = `<strong>R$ ${item.valor.toFixed(2)}</strong>`;
-
         info.appendChild(titulo);
         info.appendChild(preco);
 
