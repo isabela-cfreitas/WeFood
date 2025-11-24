@@ -73,6 +73,41 @@ class EstabelecimentoModel {
             r.frete
         );
     }
+
+    static async criarEstabelecimento(usuarioData, estabelecimentoData) {
+        const conn = await pool.getConnection();
+
+        try {
+            await conn.beginTransaction();
+
+            //tipo de query diferente da usada para select
+            //primeiro insere na tabela usuário, pq todo estabelecimento é um usuário
+            const [result] = await conn.query(
+                `INSERT INTO usuario (nome, numTelefone, email, hashSenha)
+                 VALUES (?, ?, ?, ?)`,
+                [usuarioData.nome, usuarioData.telefone, usuarioData.email, usuarioData.hashSenha]
+            );
+
+            const novoId = result.insertId;//guarda o id do usuário que acabou de ser inserido porque vai precisar dele para usar como chave estrangeira da tabela estabelecimento para a de usuário
+            //id, nome, telefone, email, senha, cnpj, endereco, imagem, distancia, avaliacao, frete
+            //depois insere na tabela estabelecimento
+            await conn.query(
+                `INSERT INTO estabelecimento (id_estabelecimento, cnpj, endereco, imagem, distancia, avaliacao, frete)
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                [novoId, estabelecimentoData.cnpj, estabelecimentoData.endereco, estabelecimentoData.imagem, estabelecimentoData.distancia, estabelecimentoData.avaliacao, estabelecimentoData.frete]
+            );
+
+            await conn.commit();
+            return { id: novoId };//se der certo a funçao retorna o id
+
+        } catch (err) {
+            await conn.rollback();
+            throw err;
+
+        } finally {
+            conn.release();
+        }
+    }
 }
 
 module.exports = EstabelecimentoModel;
