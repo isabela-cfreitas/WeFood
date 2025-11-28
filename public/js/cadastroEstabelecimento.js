@@ -50,7 +50,7 @@ async function enviarFormulario() {
 
         if (resposta.ok) {
             alert("Estabelecimento cadastrado com sucesso!");
-            // window.location.href = "/LoginEstabelecimento";
+            window.location.href = "/LoginEstabelecimento";
         } else {
             alert("Erro: " + resultado.erro);
         }

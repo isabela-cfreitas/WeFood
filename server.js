@@ -12,6 +12,7 @@ const clienteRoutes = require("./routes/clienteRoutes");
 // app.use(express.json()); 
 // app.use(express.static(path.join(__dirname, 'public')));
 
+//cria apis
 app.use("/api/estabelecimentos", estRoutes);
 app.use("/api/produtos", produtoRoutes);
 
@@ -23,10 +24,18 @@ app.get("/CadastroEstabelecimento", (req,res) => {
     res.sendFile(path.join(__dirname,"public","cadastroEstabelecimento.html"));
 });
 
+app.get("/HomeCliente", (req,res) => {
+    res.sendFile(path.join(__dirname,"public","index.html"));
+});
+
 app.use("/api/clientes", clienteRoutes);
 
 app.get("/LoginCliente", (req,res) => {
     res.sendFile(path.join(__dirname,"public","loginCliente.html"));
+});
+
+app.get("/LoginEstabelecimento", (req,res) => {
+    res.sendFile(path.join(__dirname,"public","loginEstabelecimento.html"));
 });
 
 // app.get("/LoginEstabelecimento", (req,res) => {

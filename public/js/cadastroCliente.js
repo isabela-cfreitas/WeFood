@@ -1,4 +1,4 @@
-async function enviarFormulario() {
+async function enviarFormulario() { //essa função é chamada por onclick no botão do html de cadastro, aí ela pega os dados dos labels por ip
     const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;
     const telefone = document.getElementById("telefone").value;
@@ -19,7 +19,7 @@ async function enviarFormulario() {
         return;
     }
 
-    const enderecoCompleto = `${rua}, ${numero}, ${bairro}, ${cidade}, CEP ${cep}, Compl: ${complemento}`;
+    const enderecoCompleto = `${rua}, ${numero}, ${bairro}, ${cidade}, CEP ${cep}, Compl: ${complemento}`;//junta os elementos do endereço
 
     const dados = {
         nome,
@@ -28,20 +28,20 @@ async function enviarFormulario() {
         senha,
         cpf,
         endereco: enderecoCompleto
-    };
+    }; //cria um objeto contendo tudo
 
     try {
         const resposta = await fetch("/api/clientes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
-        });
+        }); //isso aqui envia os valores digitados para o backend. api vai receber isso, chamar funçoes no controller e de lá são chamadas funçoes da model, que atualizam o banco de dados
 
         const resultado = await resposta.json();
 
         if (resposta.ok) {
             alert("Cliente cadastrado com sucesso!");
-            window.location.href = "/LoginCliente";
+            window.location.href = "/LoginCliente"; //joga pra tela de loginCliente
         } else {
             alert("Erro: " + resultado.erro);
         }

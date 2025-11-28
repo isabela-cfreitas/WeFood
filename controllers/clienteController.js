@@ -47,4 +47,57 @@ async function criarCliente(req, res) {
     }
 }
 
-module.exports = { criarCliente };
+async function getClientePorEmail(req, res) {
+    try {
+        const email = req.params.email;
+        const est = await ClienteModel.getPorEmail(email);
+
+        if (!est) {
+            return res.status(404).json({ erro: "Email não foi cadastrado" });
+        }
+
+        res.json(est);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ erro: "Erro ao buscar cliente" });
+    }
+}
+
+async function loginCliente(req, res) {
+    try {
+        const { email, senha } = req.body;
+
+        // busca usuário pelo email
+        const cliente = await ClienteModel.getPorEmail(email);
+
+        if (!cliente) {
+            return res.status(404).json({ erro: "Email não cadastrado" });
+        }
+
+        // compara a senha enviada com o hash do banco
+        const senhaCorreta = await bcrypt.compare(senha, cliente.hashSenha);
+
+        if (!senhaCorreta) {
+            return res.status(401).json({ erro: "Senha incorreta" });
+        }
+
+        // login OK → devolve dados úteis
+        res.json({
+            msg: "Login realizado",
+            cliente: {
+                id: cliente.id,
+                nome: cliente.nome,
+                email: cliente.email,
+                telefone: cliente.telefone,
+                cpf: cliente.cpf,
+                endereco: cliente.endereco
+            }
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao fazer login" });
+    }
+}
+
+module.exports = { criarCliente, getClientePorEmail, loginCliente };
