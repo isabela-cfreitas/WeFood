@@ -67,21 +67,18 @@ async function loginCliente(req, res) {
     try {
         const { email, senha } = req.body;
 
-        // busca usuário pelo email
         const cliente = await ClienteModel.getPorEmail(email);
 
         if (!cliente) {
             return res.status(404).json({ erro: "Email não cadastrado" });
         }
 
-        // compara a senha enviada com o hash do banco
         const senhaCorreta = await bcrypt.compare(senha, cliente.hashSenha);
 
         if (!senhaCorreta) {
             return res.status(401).json({ erro: "Senha incorreta" });
         }
 
-        // login OK → devolve dados úteis
         res.json({
             msg: "Login realizado",
             cliente: {

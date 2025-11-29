@@ -46,8 +46,66 @@ async function criarEstabelecimento(req, res) {
     }
 }
 
+async function getEstabelecimentoPorEmail(req, res) {
+    try {
+        const email = req.params.email;
+        const est = await EstabelecimentoModel.getPorEmail(email);
+
+        if (!est) {
+            return res.status(404).json({ erro: "Email não foi cadastrado" });
+        }
+
+        res.json(est);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ erro: "Erro ao buscar estabelecimento" });
+    }
+}
+
+async function loginEstabelecimento(req, res) {
+    try {
+        const { email, senha } = req.body;
+
+        //busca usuário pelo email
+        const estabelecimento = await EstabelecimentoModel.getPorEmail(email);
+
+        if (!estabelecimento) {
+            return res.status(404).json({ erro: "Email não cadastrado" });
+        }
+
+        //compara a senha enviada com o hash do banco
+        const senhaCorreta = await bcrypt.compare(senha, estabelecimento.hashSenha);
+
+        if (!senhaCorreta) {
+            return res.status(401).json({ erro: "Senha incorreta" });
+        }
+
+        res.json({
+            msg: "Login realizado",
+            estabelecimento: {
+                id: estabelecimento.id,
+                nome: estabelecimento.nome,
+                email: estabelecimento.email,
+                telefone: estabelecimento.telefone,
+                cnpj: estabelecimento.cnpj,
+                endereco: estabelecimento.endereco,
+                imagem: estabelecimento.imagem,
+                distancia: estabelecimento.distancia,
+                avaliacao: estabelecimento.avaliacao,
+                frete: estabelecimento.frete
+            }
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: "Erro ao fazer login" });
+    }
+}
+
 module.exports = {
     listarEstabelecimentos,
     getEstabelecimentoPorId,
-    criarEstabelecimento
+    criarEstabelecimento,
+    getEstabelecimentoPorEmail,
+    loginEstabelecimento
 };

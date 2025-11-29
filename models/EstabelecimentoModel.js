@@ -108,6 +108,29 @@ class EstabelecimentoModel {
             conn.release();
         }
     }
+    static async getPorEmail(email) {
+        const [rows] = await pool.query(`
+            SELECT 
+                u.id_usuario AS id,
+                u.nome,
+                u.numTelefone AS telefone,
+                u.email,
+                u.hashSenha,
+                e.cnpj,
+                e.endereco,
+                e.imagem,
+                e.distancia,
+                e.avaliacao,
+                e.frete
+            FROM usuario u
+            JOIN estabelecimento e ON u.id_usuario = e.id_estabelecimento
+            WHERE u.email = ?;
+        `, [email]);
+
+        if (rows.length === 0) return null;
+
+        return rows[0];
+    }
 }
 
 module.exports = EstabelecimentoModel;

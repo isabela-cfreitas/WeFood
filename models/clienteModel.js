@@ -36,24 +36,24 @@ class ClienteModel {
         }
     }
     static async getPorEmail(email) {
-    const [rows] = await pool.query(`
-        SELECT 
-            u.id_usuario AS id,
-            u.nome,
-            u.numTelefone AS telefone,
-            u.email,
-            u.hashSenha,
-            c.cpf,
-            c.endereco
-        FROM usuario u
-        JOIN cliente c ON u.id_usuario = c.id_cliente
-        WHERE u.email = ?;
-    `, [email]);
+        const [rows] = await pool.query(`
+            SELECT 
+                u.id_usuario AS id,
+                u.nome,
+                u.numTelefone AS telefone,
+                u.email,
+                u.hashSenha,
+                c.cpf,
+                c.endereco
+            FROM usuario u
+            JOIN cliente c ON u.id_usuario = c.id_cliente
+            WHERE u.email = ?;
+        `, [email]);
 
-    if (rows.length === 0) return null;
+        if (rows.length === 0) return null;
 
-    return rows[0];
-}
+        return rows[0];
+    }
 }
 
 module.exports = ClienteModel;

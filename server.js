@@ -28,6 +28,10 @@ app.get("/HomeCliente", (req,res) => {
     res.sendFile(path.join(__dirname,"public","index.html"));
 });
 
+app.get("/HomeEstabelecimento", (req,res) => {
+    res.sendFile(path.join(__dirname,"public","HomepageEstabelecimento.html"));
+});
+
 app.use("/api/clientes", clienteRoutes);
 
 app.get("/LoginCliente", (req,res) => {
