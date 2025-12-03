@@ -135,3 +135,12 @@ body {
   font-size: 14px;
   color: #666;
 }
+
+.btn-login {
+  background-color: #F62932;
+  color:white;
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 5px;
+}
