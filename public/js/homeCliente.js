@@ -62,7 +62,7 @@ async function verificarSessao() {
     } else {
         //botao de login
         const botao = document.createElement("a");
-        botao.href = "loginCliente";
+        botao.href = "loginGeral";
         botao.classList.add("btn-login");
         botao.textContent = "Entrar";
 
