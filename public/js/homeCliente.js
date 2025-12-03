@@ -41,12 +41,39 @@ function renderizar(lista) {
         container.appendChild(card);//container pega todos os cards
     });
 }
+async function verificarSessao() {
+    const resp = await fetch("/api/logado");
+    const dados = await resp.json();
 
+    const areaLogin = document.getElementById("areaLogin");
+    areaLogin.innerHTML = ""; // limpa nó
+
+    if (dados.logado) {
+        //só mostra botão de perfil e de carrinho se estiver logado
+        const span = document.createElement("span");
+        span.textContent = `👤  ${dados.nome}              `;
+        areaLogin.appendChild(span);
+
+        const carrinho = document.createElement("a");
+        carrinho.href = "carrinho.html";
+        carrinho.textContent = "🛒";
+        areaLogin.appendChild(carrinho);
+
+    } else {
+        //botao de login
+        const botao = document.createElement("a");
+        botao.href = "loginCliente";
+        botao.classList.add("btn-login");
+        botao.textContent = "Entrar";
+
+        areaLogin.appendChild(botao);
+    }
+}
+//filtros
 function tirarFiltros(){
     renderizar(estabelecimentosCache);
 }
 
-//filtros
 function filtroFreteGratis() {
     const filtrados = estabelecimentosCache.filter(e => e.frete == 0); //filter cria um novo array que só tem os restaurantes com frete = 0
     renderizar(filtrados);
@@ -73,5 +100,6 @@ window.filtroMelhoresAvaliacoes = filtroMelhoresAvaliacoes;
 window.filtroMaisProximos = filtroMaisProximos;
 
 document.addEventListener("DOMContentLoaded", () => {
+    verificarSessao();
     carregarEstabelecimentos(); //por padrao quando abre a pagina vai carregar e renderizar todos os restaurantes, só se a pessoa apertar um botao de filtro que chama a renderizar para a lista filtrada
 });

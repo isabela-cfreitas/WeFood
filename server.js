@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const session = require("express-session");
 
 app.use(express.json()); 
-app.use(express.static(path.join(__dirname, 'public')));
 
 const estRoutes = require("./routes/estabelecimentoRoutes");//recebe requisição e joga para rotas de estabelecimento
 const produtoRoutes = require("./routes/produtoRoutes"); //joga a requisição para rotas de produto
@@ -11,6 +11,17 @@ const clienteRoutes = require("./routes/clienteRoutes");
 
 // app.use(express.json()); 
 // app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({//requisicao de criar sessao
+    secret: "senhadeautenticarcookie",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 2 //2h tempo de vida
+    }
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //cria apis
 app.use("/api/estabelecimentos", estRoutes);
@@ -41,6 +52,18 @@ app.get("/LoginCliente", (req,res) => {
 app.get("/LoginEstabelecimento", (req,res) => {
     res.sendFile(path.join(__dirname,"public","loginEstabelecimento.html"));
 });
+
+app.get("/api/logado", (req, res) => {
+  if (req.session && req.session.user) {//verifica se tem uma sessao criada e se tem um user nela
+    return res.json({
+      logado: true,
+      nome: req.session.user.nome,
+      tipo: req.session.user.tipo
+    });
+  }
+  res.json({ logado: false });
+});
+
 
 // app.get("/LoginEstabelecimento", (req,res) => {
 //     res.sendFile(path.join(__dirname,"public","loginCliente.html"));

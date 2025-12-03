@@ -79,6 +79,13 @@ async function loginCliente(req, res) {
             return res.status(401).json({ erro: "Senha incorreta" });
         }
 
+        //salva informações para manter cliente na sessao
+        req.session.user = {
+            id: cliente.id,
+            tipo: "cliente",
+            nome: cliente.nome
+        };
+
         res.json({
             msg: "Login realizado",
             cliente: {
@@ -96,5 +103,10 @@ async function loginCliente(req, res) {
         res.status(500).json({ erro: "Erro ao fazer login" });
     }
 }
+function logoutCliente(req, res) {
+    req.session.destroy(() => {
+        res.json({ msg: "Logout realizado" });
+    });
+}
 
-module.exports = { criarCliente, getClientePorEmail, loginCliente };
+module.exports = { criarCliente, getClientePorEmail, loginCliente, logoutCliente };
