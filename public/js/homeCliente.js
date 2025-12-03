@@ -42,6 +42,10 @@ function renderizar(lista) {
     });
 }
 
+function tirarFiltros(){
+    renderizar(estabelecimentosCache);
+}
+
 //filtros
 function filtroFreteGratis() {
     const filtrados = estabelecimentosCache.filter(e => e.frete == 0); //filter cria um novo array que só tem os restaurantes com frete = 0
@@ -63,6 +67,7 @@ function filtroMaisProximos() {
 }
 
 //fazer funções existirem no escopo global para poderem ser chamadas por onclick
+window.tirarFiltros = tirarFiltros;
 window.filtroFreteGratis = filtroFreteGratis;
 window.filtroMelhoresAvaliacoes = filtroMelhoresAvaliacoes;
 window.filtroMaisProximos = filtroMaisProximos;
