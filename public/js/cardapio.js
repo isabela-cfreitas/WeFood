@@ -47,9 +47,34 @@ function renderizarProdutos(lista) {
         remover.textContent = "-";
         info.appendChild(remover);
 
+        const contador = document.createElement("span");
+        contador.className = "contador";
+        contador.textContent = " 1 ";
+        info.appendChild(contador);
+
         const adicionar = document.createElement("button");
         adicionar.textContent = "+";
         info.appendChild(adicionar);
+
+        adicionar.addEventListener("click", () => {
+            let valor = parseInt(contador.textContent) + 1;
+            contador.textContent = " " + valor + " ";
+        });
+
+        remover.addEventListener("click", () => {
+            let valor = parseInt(contador.textContent);
+            if (valor > 1) contador.textContent = " " + valor - 1 + " ";
+        });
+
+        const botaoCarrinho = document.createElement("button");
+        botaoCarrinho.textContent = "Adicionar ao carrinho";
+        botaoCarrinho.className = "botao";
+        info.appendChild(botaoCarrinho);
+
+        botaoCarrinho.addEventListener("click", () => {
+            const quantidade = parseInt(contador.textContent);
+            adicionarAoCarrinho(item, quantidade);
+        });
 
         const img = document.createElement("img");
         img.src = item.imagem;
@@ -59,6 +84,37 @@ function renderizarProdutos(lista) {
 
         container.appendChild(card);
     });
+}
+
+async function adicionarAoCarrinho(produtoItem, quantidade) {
+    console.log("[FRONT] clicou adicionarAoCarrinho", { produtoItem, quantidade });
+
+    try {
+        const resp = await fetch("http://localhost:1504/api/carrinho/adicionar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_produto: produtoItem.id,   // <--- AQUI É "id", não "id_produto"
+                quantidade: quantidade
+            })
+        });
+
+        console.log("[FRONT] resposta fetch status:", resp.status, resp.statusText);
+
+        const data = await resp.json();
+        console.log("[FRONT] body recebido (json):", data);
+
+        if (resp.ok) {
+            alert("Adicionado ao carrinho!");
+        } else {
+            alert("Erro: " + data.erro);
+        }
+
+    } catch (erro) {
+        console.error("[FRONT] erro no fetch:", erro);
+    }
 }
 
 async function main() {
