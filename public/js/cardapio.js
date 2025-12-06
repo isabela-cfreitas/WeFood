@@ -48,7 +48,7 @@ function renderizarProdutos(lista) {
         info.appendChild(remover);
 
         const adicionar = document.createElement("button");
-        remover.textContent = "+";
+        adicionar.textContent = "+";
         info.appendChild(adicionar);
 
         const img = document.createElement("img");
