@@ -8,6 +8,7 @@ app.use(express.json());
 const estRoutes = require("./routes/estabelecimentoRoutes");//recebe requisição e joga para rotas de estabelecimento
 const produtoRoutes = require("./routes/produtoRoutes"); //joga a requisição para rotas de produto
 const clienteRoutes = require("./routes/clienteRoutes");
+const carrinhoRoutes = require("./routes/carrinhoRoutes");
 
 // app.use(express.json()); 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //cria apis
 app.use("/api/estabelecimentos", estRoutes);
 app.use("/api/produtos", produtoRoutes);
+app.use("/api/carrinho", carrinhoRoutes);
 
 app.get("/CadastroCliente", (req,res) => {
     res.sendFile(path.join(__dirname,"public","cadastroCliente.html"));
@@ -53,11 +55,16 @@ app.get("/LoginEstabelecimento", (req,res) => {
     res.sendFile(path.join(__dirname,"public","loginEstabelecimento.html"));
 });
 
+app.get("/LoginGeral", (req,res) => {
+    res.sendFile(path.join(__dirname,"public","loginGeral.html"));
+});
+
 app.get("/api/logado", (req, res) => {
   if (req.session && req.session.user) {//verifica se tem uma sessao criada e se tem um user nela
     return res.json({
       logado: true,
       nome: req.session.user.nome,
+      endereco: req.session.user.endereco,
       tipo: req.session.user.tipo
     });
   }
