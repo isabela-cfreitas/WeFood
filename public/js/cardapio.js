@@ -43,6 +43,14 @@ function renderizarProdutos(lista) {
         info.appendChild(titulo);
         info.appendChild(preco);
 
+        const remover = document.createElement("button");
+        remover.textContent = "-";
+        info.appendChild(remover);
+
+        const adicionar = document.createElement("button");
+        remover.textContent = "+";
+        info.appendChild(adicionar);
+
         const img = document.createElement("img");
         img.src = item.imagem;
         img.alt = item.nome;
