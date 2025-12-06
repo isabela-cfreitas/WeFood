@@ -49,6 +49,14 @@ async function verificarSessao() {
     areaLogin.innerHTML = ""; // limpa nó
 
     if (dados.logado) {
+        const local_div = document.createElement("div");
+        local_div.classList.add("location");
+        const local_spam = document.createElement("span");
+        const partes = dados.endereco.split(",");
+        const enderecoCurto = partes.length >= 2? `${partes[0].trim()}, ${partes[1].trim()}`: dados.endereco;
+        local_spam.textContent = `📍 Entregar em ${enderecoCurto}`;
+        local_div.appendChild(local_spam);
+        areaLogin.appendChild(local_div);
         //só mostra botão de perfil e de carrinho se estiver logado
         const span = document.createElement("span");
         span.textContent = `👤  ${dados.nome}              `;

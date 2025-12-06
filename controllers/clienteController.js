@@ -83,6 +83,7 @@ async function loginCliente(req, res) {
         req.session.user = {
             id: cliente.id,
             tipo: "cliente",
+            endereco: cliente.endereco,
             nome: cliente.nome
         };
 
