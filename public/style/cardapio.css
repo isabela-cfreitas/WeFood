@@ -37,3 +37,7 @@ header {
 .item-info {
     max-width: 70%;
 }
+
+.botao-vermelho {
+    color: red;
+}

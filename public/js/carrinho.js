@@ -47,6 +47,11 @@ async function carregar_carrinho() {
         img.classList.add("img-item");
         img.src = item.imagem;
 
+        const remover = document.createElement("button");
+        remover.classList.add("botao-vermelho");
+        remover.textContent = "Remover do carrinho";
+        card.appendChild(remover);
+
         card.appendChild(info);
         card.appendChild(img);
         lista.appendChild(card);
