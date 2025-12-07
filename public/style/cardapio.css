@@ -38,6 +38,30 @@ header {
     max-width: 70%;
 }
 
+.input-quantidade {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    padding: 0;
+}
+
+.botao {
+    background-color: #F62932;
+    color: white;
+    font-size: 14px;
+    width: 80%;
+    padding: 12px;
+    font-family: "Inter", Arial, sans-serif;
+    border: none;
+    border-radius: 25px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.botao:hover {
+    background-color: #d71e28;
+}
+
 .botao-vermelho {
     color: red;
 }
