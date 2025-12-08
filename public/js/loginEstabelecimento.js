@@ -16,7 +16,6 @@ async function enviarFormulario() { //essa função é chamada por onclick no bo
             return;
         }
 
-        alert("Login realizado!");
 
         console.log("Dados do estabelecimento logado:", resultado.estabelecimento);
 

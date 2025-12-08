@@ -96,3 +96,7 @@
 .botao:hover {
     background-color: #d71e28;
 }
+
+.botao-remover {
+    font-size: 14px;
+}

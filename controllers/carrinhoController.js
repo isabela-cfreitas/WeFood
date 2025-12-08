@@ -40,7 +40,30 @@ async function adicionarAoCarrinho(req, res) {
     }
 }
 
+async function removerItem(req, res) {
+    try {
+        if (!req.session.user) {
+            return res.status(401).json({ erro: "Não logado" });
+        }
+
+        const { idItem } = req.body;
+
+        if (!idItem) {
+            return res.status(400).json({ erro: "idItem ausente" });
+        }
+
+        await CarrinhoModel.removerItem(idItem);
+
+        res.json({ sucesso: true });
+
+    } catch (erro) {
+        console.error("ERRO AO REMOVER ITEM:", erro);
+        res.status(500).json({ erro: "Erro no servidor." });
+    }
+}
+
+
 module.exports = {
     getCarrinhoDoCliente,
-    adicionarAoCarrinho
+    adicionarAoCarrinho, removerItem
 };

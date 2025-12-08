@@ -48,10 +48,29 @@ async function carregar_carrinho() {
         img.src = item.imagem;
 
         const remover = document.createElement("button");
-        remover.classList.add("botao-vermelho");
+        remover.classList.add("botao");
+        remover.classList.add("botao-remover");
         remover.textContent = "Remover do carrinho";
-        card.appendChild(remover);
 
+        remover.addEventListener("click", async () => {
+
+            const resp = await fetch("/api/carrinho/remover", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ idItem: item.idItem })
+            });
+
+            if (!resp.ok) {
+                console.error("[FRONT] erro ao remover");
+                return;
+            }
+
+            carregar_carrinho(); //tem que recarregar depois de remover p dar p ver que sumiu
+        });
+
+        card.appendChild(remover);
         card.appendChild(info);
         card.appendChild(img);
         lista.appendChild(card);

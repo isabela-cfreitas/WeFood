@@ -69,6 +69,13 @@ class CarrinhoModel {
         }
     }
 
+    static async removerItem(idItem) {
+        return pool.query(
+            "DELETE FROM item_carrinho WHERE id = ?",
+            [idItem]
+        );
+    }
+
 }
 
 module.exports = CarrinhoModel;
