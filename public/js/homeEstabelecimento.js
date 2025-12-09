@@ -16,7 +16,10 @@ async function verificarSessao() {
         const deslogar = document.createElement("button");
         deslogar.innerText = "Sair"
         deslogar.classList.add("btn-login")
-        deslogar.onclick = await fetch("/api/estabelecimento/logout")
+        deslogar.addEventListener("click", async () => {
+            await fetch("/api/estabelecimento/logout", { method: "POST" });
+            window.location.href = "/HomeCliente";
+        });
         areaLogin.appendChild(deslogar)
 
     }

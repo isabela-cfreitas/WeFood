@@ -9,5 +9,6 @@ router.post("/", ctrl.criarEstabelecimento);//chama função do controller
 //router.get("/:email", ctrl.getEstabelecimentoPorEmail)
 router.get("/email/:email", ctrl.getEstabelecimentoPorEmail);
 router.post("/login", ctrl.loginEstabelecimento);
+router.post("/logout", ctrl.logoutEstabelecimento);
 
 module.exports = router;
