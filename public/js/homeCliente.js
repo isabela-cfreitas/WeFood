@@ -67,6 +67,11 @@ async function verificarSessao() {
         carrinho.textContent = "🛒";
         areaLogin.appendChild(carrinho);
 
+        const deslogar = document.createElement("button");
+        deslogar.innerText = "Sair"
+        deslogar.classList.add("btn-login")
+        areaLogin.appendChild(deslogar)
+
     } else {
         //botao de login
         const botao = document.createElement("a");
