@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang=" pt-BR">
+    <head>
+        <title>WeFood - Finalizar Pedido</title>
+        <link rel="stylesheet" href="style/carrinho.css"/>
+    </head>
+    <body>
+        <header class="header">
+            <h1>Finalizar Pedido</h1>
+        </header>
+        <div class="container">
+            <div class="coluna esquerda">
+                <h1 class="headColuna">Endereço de entrega</h1>
+                <select id="enderecos"></select>
+
+                <h1 class="headColuna">Forma de entrega</h1>
+                
+                <input type="radio" name="entrega" name="retirarOpt" id="retirar"/>
+                <label for="retirar">Retirar no estabelecimento</label>
+
+                <input type="radio" name="entrega" name="deliveryOpt" id="delivery"/>
+                <label for="delivery">Delivery</label>
+                
+                <h1 class="headColuna">Forma de pagamento</h1>
+                
+                <input type="radio" name="pagamento" name="creditoOpt" id="credito"/>
+                <label for="credito">Cartão de Crédito</label>
+
+                <input type="radio" name="pagamento" name="debitoOpt" id="debito"/>
+                <label for="debito">Cartão de Débito</label>
+
+                <input type="radio" name="pagamento" name="pixOpt" id="pix"/>
+                <label for="pix">Pix</label>
+
+                <input type="radio" name="pagamento" name="dinheiroOpt" id="dinheiro"/>
+                <label for="dinheiro">Dinheiro</label>
+
+                <h1 class="headColuna">Observações</h1>
+                <textarea id="observacoes" rows="7" cols="60"></textarea>
+            </div>
+            <div class="coluna direita">
+                <h1 class="headColuna">Resumo do pedido</h1>
+                    <section id="resumo" class="resumo"></section>
+                <button class="botao">Finalizar Pedido</button>
+            </div>
+        </div>
+        <script src="js/carrinho.js"></script>
+    </body>
+</html>
