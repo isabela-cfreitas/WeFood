@@ -70,7 +70,10 @@ async function verificarSessao() {
         const deslogar = document.createElement("button");
         deslogar.innerText = "Sair"
         deslogar.classList.add("btn-login")
-        deslogar.onclick = await fetch("/api/clientes/logout")
+        deslogar.addEventListener("click", async () => {
+            await fetch("/api/clientes/logout", { method: "POST" });
+            window.location.href = "/";
+        });
         areaLogin.appendChild(deslogar)
 
     } else {

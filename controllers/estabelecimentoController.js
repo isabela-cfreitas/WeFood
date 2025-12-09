@@ -109,10 +109,17 @@ async function loginEstabelecimento(req, res) {
     }
 }
 
+function logoutEstabelecimento(req, res) {
+    req.session.destroy(() => {
+        res.json({ msg: "Logout realizado" });
+    });
+}
+
 module.exports = {
     listarEstabelecimentos,
     getEstabelecimentoPorId,
     criarEstabelecimento,
     getEstabelecimentoPorEmail,
-    loginEstabelecimento
+    loginEstabelecimento,
+    logoutEstabelecimento
 };
