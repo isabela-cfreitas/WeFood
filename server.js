@@ -9,7 +9,6 @@ const estRoutes = require("./routes/estabelecimentoRoutes");//recebe requisiçã
 const produtoRoutes = require("./routes/produtoRoutes"); //joga a requisição para rotas de produto
 const clienteRoutes = require("./routes/clienteRoutes");
 const carrinhoRoutes = require("./routes/carrinhoRoutes");
-const pedidoRoutes = require("./routes/pedidoRoutes");
 
 // app.use(express.json()); 
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -44,7 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/api/estabelecimentos", estRoutes);
 app.use("/api/produtos", produtoRoutes);
 app.use("/api/carrinho", carrinhoRoutes);
-app.use("/api/pedido", pedidoRoutes);
 
 app.get("/CadastroCliente", (req,res) => {
     res.sendFile(path.join(__dirname,"public","cadastroCliente.html"));
