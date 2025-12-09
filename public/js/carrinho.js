@@ -101,6 +101,10 @@ async function carregar_carrinho() {
     resumo.appendChild(entrega);
     resumo.appendChild(linha);
     resumo.appendChild(totalFinal);
+
+    document.getElementById("btnFinalizar").addEventListener("click", () => {
+        window.location.href = "finalizarPedido.html";
+    });
 }
 
 document.addEventListener("DOMContentLoaded", carregar_carrinho);
