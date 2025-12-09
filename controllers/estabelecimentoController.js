@@ -80,6 +80,13 @@ async function loginEstabelecimento(req, res) {
             return res.status(401).json({ erro: "Senha incorreta" });
         }
 
+        //salva informações para manter estabelecimento na sessao
+        req.session.user = {
+            id: estabelecimento.id,
+            tipo: "estabelecimento",
+            nome: estabelecimento.nome
+        };
+
         res.json({
             msg: "Login realizado",
             estabelecimento: {

@@ -23,6 +23,10 @@ async function carregar_carrinho() {
     let total = 0;
 
     itens.forEach(item => {
+        if (!item.idItem) {
+            lista.textContent = "Seu carrinho está vazio.";
+            return;
+        }
         const card = document.createElement("div");
         card.classList.add("item-card");
 

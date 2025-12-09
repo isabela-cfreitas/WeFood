@@ -6,7 +6,8 @@ function getIdDaUrl() {//pega o id daquele restaurante
 }
 
 async function carregarRestaurante(id) {//pega valores das colunas do estabelecimento que tem aquele id e ja devolve em forma de objeto da classe estabelecimento
-    const resp = await fetch(`/api/estabelecimentos/${id}`);
+    //const resp = await fetch(`/api/estabelecimentos/${id}`);
+    const resp = await fetch(`/api/estabelecimentos/id/${id}`);
     return await resp.json();
 }
 

@@ -48,7 +48,7 @@ async function verificarSessao() {
     const areaLogin = document.getElementById("areaLogin");
     areaLogin.innerHTML = ""; // limpa nó
 
-    if (dados.logado) {
+    if (dados.logado && dados.tipo === "cliente") {
         const local_div = document.createElement("div");
         local_div.classList.add("location");
         const local_spam = document.createElement("span");

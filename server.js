@@ -22,6 +22,21 @@ app.use(session({//requisicao de criar sessao
     }
 }));
 
+
+app.use((req, res, next) => {//verifica quando abre a aplicaçao de já tem uma sessao ativa e olha se é de cliente ou estabeleciemnto
+    if (req.path.startsWith("/api")) return next();
+
+    if (req.session && req.session.user) {
+        if (req.session.user.tipo === "cliente" && req.path === "/") {
+            return res.redirect("/HomeCliente");
+        }
+        if (req.session.user.tipo === "estabelecimento" && req.path === "/") {
+            return res.redirect("/HomeEstabelecimento");
+        }
+    }
+    next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //cria apis
@@ -60,11 +75,11 @@ app.get("/LoginGeral", (req,res) => {
 });
 
 app.get("/api/logado", (req, res) => {
-  if (req.session && req.session.user) {//verifica se tem uma sessao criada e se tem um user nela
+  if (req.session && req.session.user) {
     return res.json({
       logado: true,
       nome: req.session.user.nome,
-      endereco: req.session.user.endereco,
+      endereco: req.session.user.endereco || null,
       tipo: req.session.user.tipo
     });
   }
